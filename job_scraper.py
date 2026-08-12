@@ -1,7 +1,7 @@
 import requests
 
-GREENHOUSE_COMPANIES = ["n26", "highradius", "postman", "fastly", "figma", "glance", "mongodb", "groww", "robinhood", "affirm", "inmobi", "stripe", "phonepe", "gitlab", "sofi", "agoda", "twilio", "coinbase", "chime", "careem", "slice", "bcg", "cloudflare", "hubspot"]
-LEVER_COMPANIES = ["pocketfm", "cred", "fi", "freshworks", "plaid", "kpmg", "kraken", "atlassian", "epifi", "fampay", "meesho", "paytm"]
+GREENHOUSE_COMPANIES = ["highradius", "hubspot", "grafanalabs", "lyft", "instacart", "elastic", "stripe", "digit", "druva", "webflow", "brex", "postman", "twilio", "newrelic", "chime", "robinhood", "airbnb", "carta", "fastly", "n26", "careem", "intercom", "pagerduty", "samsara", "sofi", "gitlab", "agoda", "launchdarkly", "glance", "coinbase", "okta", "figma", "reddit", "scaleai", "dropbox", "slice", "mixpanel", "gusto", "amplitude", "circleci", "squarespace", "datadog", "phonepe", "groww", "netlify", "algolia", "asana", "affirm", "bcg", "attentive", "discord", "remote", "databricks", "contentful", "cloudflare", "inmobi", "airtable", "mongodb", "vercel", "pinterest", "calendly", "typeform"]
+LEVER_COMPANIES = ["cred", "meesho", "paytm", "gopuff", "fampay", "fi", "plaid", "pocketfm", "epifi", "kpmg", "spotify", "freshworks", "kraken"]
 
 def get_greenhouse_jobs(company):
     """

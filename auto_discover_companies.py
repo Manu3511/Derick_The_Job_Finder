@@ -43,8 +43,26 @@ COMPANIES_TO_TEST = [
     "expedia", "booking", "agoda", "oyo", "redbus", "makemytrip", "yatra", "easemytrip", 
     "goibibo", "canva", "notion", "figma", "slack", "zoom", "hubspot", "datadog", 
     "snowflake", "confluent", "mongodb", "elastic", "hashicorp", "gitlab", "github", 
-    "twilio", "sendgrid", "crowdstrike", "cloudflare", "fastly", "akamai", "ey", 
-    "deloitte", "pwc", "kpmg", "mckinsey", "bcg", "bain", "accenture", "cognizant"
+    "twilio", "sendgrid", "crowdstrike", "cloudflare", "fastly", "akamai", "ey",
+    "deloitte", "pwc", "kpmg", "mckinsey", "bcg", "bain", "accenture", "cognizant",
+
+    # Additional global SaaS / dev tools / infra (commonly on Greenhouse or Lever)
+    "discord", "airtable", "asana", "dropbox", "doordash", "instacart", "reddit",
+    "pinterest", "databricks", "scaleai", "rippling", "deel", "remote", "brex", "ramp",
+    "gusto", "webflow", "vercel", "netlify", "linear", "retool", "airbyte", "temporal",
+    "pagerduty", "okta", "auth0", "segment", "amplitude", "mixpanel", "zapier", "miro",
+    "loom", "calendly", "typeform", "intercom", "zendesk", "docker", "circleci",
+    "sentry", "launchdarkly", "contentful", "algolia", "redis", "grafanalabs",
+    "newrelic", "splunk", "digitalocean", "linode", "render", "supabase", "airbnb",
+    "lyft", "spotify", "shopify", "squarespace", "monday", "asanahq", "1password",
+    "carta", "benchling", "samsara", "attentive", "faire", "gopuff", "getir",
+
+    # Additional India-focused
+    "urbancompany", "cardekho", "licious", "rebelfoods", "udaan", "lenskart",
+    "pharmeasy", "innovaccer", "chargebee", "browserstack", "darwinbox", "hasura",
+    "clevertap", "capillary", "moglix", "zetwerk", "razorpay", "cure_fit", "curefit",
+    "acko", "digit", "policybazaar", "paisabazaar", "coverfox", "khatabook", "vedantu",
+    "unacademy", "physicswallah", "meesho", "urbanclap"
 ]
 
 SCRAPER_PATH = os.path.join(os.path.dirname(__file__), "job_scraper.py")
