@@ -1,0 +1,4 @@
+{
+  "summary": "Helper script to poll the getUpdates endpoint, extract the user's chat ID, save both the bot token and chat ID to config.json, and send a verification alert.",
+  "updatedAt": "2026-07-27T08:18:55.199600700Z"
+}

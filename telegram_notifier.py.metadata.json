@@ -1,0 +1,4 @@
+{
+  "summary":  "Updated telegram_notifier.py to prioritize environment variables (TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID) for seamless compatibility with GitHub Actions secrets.",
+  "updatedAt":  "2026-08-11T11:44:47.342625900Z"
+}
