@@ -3,10 +3,13 @@ import json
 import os
 import sys
 
-TOKEN = "8594154641:AAGsUN128K9Yem-OjmsCQgjmxOkmQFGxwbE"
+TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
 
 def configure():
+    if not TOKEN:
+        print("Error: TELEGRAM_BOT_TOKEN environment variable is not set.")
+        return False
     print("Checking for messages sent to the bot...")
     url = f"https://api.telegram.org/bot{TOKEN}/getUpdates"
     try:
