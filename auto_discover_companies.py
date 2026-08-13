@@ -62,7 +62,37 @@ COMPANIES_TO_TEST = [
     "pharmeasy", "innovaccer", "chargebee", "browserstack", "darwinbox", "hasura",
     "clevertap", "capillary", "moglix", "zetwerk", "razorpay", "cure_fit", "curefit",
     "acko", "digit", "policybazaar", "paisabazaar", "coverfox", "khatabook", "vedantu",
-    "unacademy", "physicswallah", "meesho", "urbanclap"
+    "unacademy", "physicswallah", "meesho", "urbanclap",
+
+    # Crypto / Web3
+    "consensys", "circle", "gemini", "binance", "opensea", "chainalysis", "alchemy",
+    "polygon", "polygontechnology", "uniswaplabs", "ripple", "anchorage", "fireblocks",
+    "bitpanda", "crypto_com", "cryptocom", "ledger", "immutable",
+
+    # Gaming / Media / Entertainment
+    "unity", "roblox", "epicgames", "riotgames", "zynga", "netflix", "hulu", "peloton",
+    "duolingo", "coursera", "udemy", "masterclass", "patreon", "substack", "medium",
+    "buzzfeed", "vice",
+
+    # Health / Bio tech
+    "oscarhealth", "cerebral", "calm", "headspace", "clover", "devoted", "grail",
+    "tempus", "flatiron", "komodohealth", "ro", "hims",
+
+    # More global SaaS / infra / dev tools
+    "clickhouse", "cockroachlabs", "planetscale", "neon", "railway", "fly", "replit",
+    "postgresml", "weaviate", "pinecone", "qdrant", "anyscale", "modal", "together",
+    "huggingface", "perplexity", "cohere", "runwayml", "stabilityai", "elevenlabs",
+    "assemblyai", "deepgram", "gong", "outreach", "clari", "highspot", "seismic",
+    "productboard", "pendo", "fullstory", "heap", "amplitude", "posthog", "june",
+    "metabase", "looker", "sisense", "thoughtspot", "hex", "census", "fivetran",
+    "airbytehq", "dbtlabs", "monte_carlo", "atlan", "collibra", "alation",
+
+    # Additional India / APAC fintech & SaaS
+    "slintel", "zoomcar", "yulu", "vahan", "bijak", "oxyzo", "recko", "juspay",
+    "setu", "signzy", "perfios", "creditmantri", "moneyview", "kissht",
+    "faircent", "indifi", "aye_finance", "u_gro", "veritas_finance", "vivriti",
+    "northernarc", "clix_capital", "loantap", "stashfin", "kredx", "mintifi",
+    "traceable", "sprinto", "zluri", "lucidity", "cloudsek", "safe_security"
 ]
 
 SCRAPER_PATH = os.path.join(os.path.dirname(__file__), "job_scraper.py")

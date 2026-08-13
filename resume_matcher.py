@@ -85,39 +85,55 @@ def match_job(title, description, location):
         if re.search(pattern, title_clean):
             return False, 0
 
-    # 3. Experience Filter: Hard filter for 0-2 years
+    # 3. Experience Filter: allow up to 3 years (was hard-capped at 2)
     req_exp = extract_experience(description)
-    if req_exp is not None and req_exp > 2:
+    if req_exp is not None and req_exp > 3:
         return False, 0
-        
+
     title_exp = extract_experience(title)
-    if title_exp is not None and title_exp > 2:
+    if title_exp is not None and title_exp > 3:
         return False, 0
 
     # 4. Role Title Fit: must be data/business/operations analyst or similar
-    valid_titles = ["analyst", "analytics", "mis", "reporting", "operations", "data", "business", "intern"]
+    valid_titles = [
+        "analyst", "analytics", "mis", "reporting", "operations", "data",
+        "business", "intern", "associate", "coordinator", "specialist",
+        "junior", "graduate", "insights", "bi ", "dashboard", "research"
+    ]
     has_valid_title = any(kw in title_clean for kw in valid_titles)
     if not has_valid_title:
         return False, 0
 
     # 5. Check for core technical skills
     score = 0
-    
+
     # SQL (High Priority)
     if "sql" in title_clean or "sql" in desc_clean:
         score += 40
-        
+
     # Excel (High Priority)
     if "excel" in desc_clean or "spreadsheet" in desc_clean or "sheets" in desc_clean:
         score += 40
-        
+
     # Python (Medium Priority)
     if "python" in desc_clean or "pandas" in desc_clean:
         score += 20
 
-    # Minimum threshold to match: must contain at least SQL or Excel (Score >= 40)
-    is_match = score >= 60
-    
+    # BI / visualization tools (Medium Priority)
+    if any(kw in desc_clean for kw in ["tableau", "power bi", "powerbi", "looker", "data studio"]):
+        score += 20
+
+    # Data warehousing / query tools (Medium Priority)
+    if any(kw in desc_clean for kw in ["bigquery", "databricks", "snowflake"]):
+        score += 20
+
+    # Stats/analysis fundamentals (Low Priority)
+    if any(kw in desc_clean for kw in ["statistics", "a/b testing", "cohort", "funnel"]):
+        score += 10
+
+    # Minimum threshold to match: lowered so a single strong skill mention (SQL/Excel/BI/warehouse) qualifies
+    is_match = score >= 40
+
     return is_match, score
 
 if __name__ == "__main__":
