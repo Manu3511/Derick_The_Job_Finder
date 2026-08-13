@@ -85,13 +85,13 @@ def match_job(title, description, location):
         if re.search(pattern, title_clean):
             return False, 0
 
-    # 3. Experience Filter: allow up to 3 years (was hard-capped at 2)
+    # 3. Experience Filter: Hard filter for 0-2 years
     req_exp = extract_experience(description)
-    if req_exp is not None and req_exp > 3:
+    if req_exp is not None and req_exp > 2:
         return False, 0
 
     title_exp = extract_experience(title)
-    if title_exp is not None and title_exp > 3:
+    if title_exp is not None and title_exp > 2:
         return False, 0
 
     # 4. Role Title Fit: must be data/business/operations analyst or similar
