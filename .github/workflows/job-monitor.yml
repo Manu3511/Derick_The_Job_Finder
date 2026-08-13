@@ -8,7 +8,7 @@ on:
 
 concurrency:
   group: job-monitor
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   run-monitor:
@@ -40,5 +40,5 @@ jobs:
           for i in 1 2 3 4 5; do
             git pull --rebase origin main && git push && break
             echo "Push failed, retrying ($i)..."
-            sleep 5
+            sleep $((i * 5))
           done
