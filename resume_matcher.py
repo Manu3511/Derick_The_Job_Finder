@@ -106,12 +106,14 @@ def match_job(title, description, location):
     if title_exp is not None and title_exp > 2:
         return False, 0
 
-    # 4. Role Title Fit: must be data/business/operations analyst or similar
-    valid_titles = [
-        "analyst", "analytics", "mis", "reporting", "data", "business intelligence",
-        "insights", "dashboard", "research analyst"
-    ]
-    has_valid_title = any(kw in title_clean for kw in valid_titles)
+    # 4. Role Title Fit: must explicitly be a data/business/product analyst or analytics role
+    valid_title_pattern = re.compile(
+        r"\b("
+        r"data\s+analy(st|tics)|business\s+analy(st|tics)|product\s+analy(st|tics)|"
+        r"analytics|analyst|mis\s+analy(st|tics)?"
+        r")\b"
+    )
+    has_valid_title = bool(valid_title_pattern.search(title_clean))
     if not has_valid_title:
         return False, 0
 
