@@ -85,6 +85,18 @@ def match_job(title, description, location):
         if re.search(pattern, title_clean):
             return False, 0
 
+    # 2b. Title Filter: Reject engineering/dev/support job functions (wrong role type for this profile)
+    wrong_function_kws = [
+        "engineer", "engineering", "developer", "swe", "sde",
+        "programmer", "devops", "sre", "qa", "quality assurance",
+        "designer", "sales", "marketing", "recruiter", "recruiting", "hr ",
+        "human resources", "legal", "counsel"
+    ]
+    for kw in wrong_function_kws:
+        pattern = r"\b" + re.escape(kw) + r"\b"
+        if re.search(pattern, title_clean):
+            return False, 0
+
     # 3. Experience Filter: Hard filter for 0-2 years
     req_exp = extract_experience(description)
     if req_exp is not None and req_exp > 2:
@@ -96,9 +108,8 @@ def match_job(title, description, location):
 
     # 4. Role Title Fit: must be data/business/operations analyst or similar
     valid_titles = [
-        "analyst", "analytics", "mis", "reporting", "operations", "data",
-        "business", "intern", "associate", "coordinator", "specialist",
-        "junior", "graduate", "insights", "bi ", "dashboard", "research"
+        "analyst", "analytics", "mis", "reporting", "data", "business intelligence",
+        "insights", "dashboard", "research analyst"
     ]
     has_valid_title = any(kw in title_clean for kw in valid_titles)
     if not has_valid_title:

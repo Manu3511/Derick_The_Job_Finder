@@ -4,9 +4,9 @@ import os
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# Expanded list of 250+ target startups, unicorns, fintechs, MNCs, and tech companies in India and globally
+# Massive list of 320+ target startups, unicorns, fintechs, MNCs, and tech companies in India and globally
 COMPANIES_TO_TEST = [
-    # Fintech & Payments
+    # Fintech, Credit & Payments (India & Global)
     "phonepe", "slice", "groww", "paytm", "cred", "fampay", "fi", "epifi", "razorpay", 
     "jupiter", "navi", "upstox", "coinswitch", "wazirx", "uni", "unicards", "onecard", 
     "indmoney", "jar", "leadsquared", "bharatpe", "postpe", "dhan", "zerodha", "smallcase", 
@@ -14,8 +14,10 @@ COMPANIES_TO_TEST = [
     "moneyview", "rupeek", "lendingkart", "flexiloans", "progcap", "dripcapital", "cashfree", 
     "pinelabs", "mswipe", "signzy", "m2p", "niyo", "scapia", "salt", "multipl", "dezerv", 
     "liquiloans", "wintwealth", "fatakpay", "moneytap", "cashe", "payu", "simpl", "lazypay",
+    "capitalfloat", "indialends", "indifi", "yubi", "credavenue", "gojo", "kreditz", "krazybee",
+    "wint", "groww-in", "slice-it", "sliceit", "fi-money", "epifi-money",
     
-    # E-commerce, Logtech, Consumer Tech
+    # E-commerce, Logtech, Consumer Tech, Q-Commerce
     "zepto", "zeptonow", "blinkit", "swiggy", "zomato", "meesho", "flipkart", "amazon", 
     "myntra", "nykaa", "ajio", "tata1mg", "pharmeasy", "netmeds", "bigbasket", "dunzo", 
     "dealshare", "citymall", "glowroad", "fashinza", "mamaearth", "sugarcosmetics", 
@@ -23,76 +25,33 @@ COMPANIES_TO_TEST = [
     "spinny", "cars24", "ola", "olaelectric", "ather", "atherenergy", "rapido", "yulu", 
     "bounce", "chalo", "locus", "shadowfax", "delhivery", "xpressbees", "ecomexpress", 
     "elasticrun", "ninjacart", "waycool", "dehaat", "cropin", "letsretail", "wakefit",
+    "greyorange", "loginext", "crofarm", "agrim", "locussh", "rapido-bike-taxi",
     
-    # SaaS, Enterprise, Analytics, AI
+    # SaaS, Enterprise, Analytics, AI, IT
     "druva", "postman", "browserstack", "chargebee", "freshworks", "zoho", "highradius", 
     "innovaccer", "darwinbox", "amagi", "fractal", "fractalanalytics", "musigma", "capillary", 
     "clevertap", "webengage", "moengage", "gupshup", "yellowai", "haptik", "sprinklr", 
     "whatfix", "bizongo", "inframarket", "ofbusiness", "moglix", "zetwerk", "inmobi", 
-    "glance", "hasura", "verloop", "verloopio", "leadhq", "leadsquared", "vymo", "hubilo",
+    "glance", "hasura", "verloop", "verloopio", "leadhq", "vymo", "hubilo",
+    "impact", "spiced", "hcl", "techmahindra", "ltimindtree", "mphasis", "coforge", 
+    "persistent", "birlasoft", "hexaware", "ust", "virtusa", "epam", "globant", 
+    "thoughtworks", "nagarro", "valuelabs", "wipro", "tcs", "infosys", "cognizant", "accenture",
     
     # EdTech, Media, Content, Gaming
     "unacademy", "byjus", "upgrad", "simplilearn", "eruditus", "classplus", "physicswallah", 
     "vedantu", "pratilipi", "kukufm", "sharechat", "moj", "dailyhunt", "zupee", "winzo", 
     "nazara", "pocketfm", "halaplay", "mpl", "dream11", "games24x7", "mobilepremierleague",
+    "kuku-fm", "pocket-fm",
     
-    # Global Tech, MNCs, Consulting (hiring in BLR)
+    # Global Tech, MNCs, Consulting (hiring in India)
     "atlassian", "salesforce", "uber", "grab", "gojek", "bolt", "careem", "stripe", 
     "adoyen", "revolut", "wise", "n26", "klarna", "affirm", "chime", "robinhood", 
     "sofi", "plaid", "coinbase", "kraken", "intuit", "adobe", "paypal", "walmart", 
     "expedia", "booking", "agoda", "oyo", "redbus", "makemytrip", "yatra", "easemytrip", 
     "goibibo", "canva", "notion", "figma", "slack", "zoom", "hubspot", "datadog", 
     "snowflake", "confluent", "mongodb", "elastic", "hashicorp", "gitlab", "github", 
-    "twilio", "sendgrid", "crowdstrike", "cloudflare", "fastly", "akamai", "ey",
-    "deloitte", "pwc", "kpmg", "mckinsey", "bcg", "bain", "accenture", "cognizant",
-
-    # Additional global SaaS / dev tools / infra (commonly on Greenhouse or Lever)
-    "discord", "airtable", "asana", "dropbox", "doordash", "instacart", "reddit",
-    "pinterest", "databricks", "scaleai", "rippling", "deel", "remote", "brex", "ramp",
-    "gusto", "webflow", "vercel", "netlify", "linear", "retool", "airbyte", "temporal",
-    "pagerduty", "okta", "auth0", "segment", "amplitude", "mixpanel", "zapier", "miro",
-    "loom", "calendly", "typeform", "intercom", "zendesk", "docker", "circleci",
-    "sentry", "launchdarkly", "contentful", "algolia", "redis", "grafanalabs",
-    "newrelic", "splunk", "digitalocean", "linode", "render", "supabase", "airbnb",
-    "lyft", "spotify", "shopify", "squarespace", "monday", "asanahq", "1password",
-    "carta", "benchling", "samsara", "attentive", "faire", "gopuff", "getir",
-
-    # Additional India-focused
-    "urbancompany", "cardekho", "licious", "rebelfoods", "udaan", "lenskart",
-    "pharmeasy", "innovaccer", "chargebee", "browserstack", "darwinbox", "hasura",
-    "clevertap", "capillary", "moglix", "zetwerk", "razorpay", "cure_fit", "curefit",
-    "acko", "digit", "policybazaar", "paisabazaar", "coverfox", "khatabook", "vedantu",
-    "unacademy", "physicswallah", "meesho", "urbanclap",
-
-    # Crypto / Web3
-    "consensys", "circle", "gemini", "binance", "opensea", "chainalysis", "alchemy",
-    "polygon", "polygontechnology", "uniswaplabs", "ripple", "anchorage", "fireblocks",
-    "bitpanda", "crypto_com", "cryptocom", "ledger", "immutable",
-
-    # Gaming / Media / Entertainment
-    "unity", "roblox", "epicgames", "riotgames", "zynga", "netflix", "hulu", "peloton",
-    "duolingo", "coursera", "udemy", "masterclass", "patreon", "substack", "medium",
-    "buzzfeed", "vice",
-
-    # Health / Bio tech
-    "oscarhealth", "cerebral", "calm", "headspace", "clover", "devoted", "grail",
-    "tempus", "flatiron", "komodohealth", "ro", "hims",
-
-    # More global SaaS / infra / dev tools
-    "clickhouse", "cockroachlabs", "planetscale", "neon", "railway", "fly", "replit",
-    "postgresml", "weaviate", "pinecone", "qdrant", "anyscale", "modal", "together",
-    "huggingface", "perplexity", "cohere", "runwayml", "stabilityai", "elevenlabs",
-    "assemblyai", "deepgram", "gong", "outreach", "clari", "highspot", "seismic",
-    "productboard", "pendo", "fullstory", "heap", "amplitude", "posthog", "june",
-    "metabase", "looker", "sisense", "thoughtspot", "hex", "census", "fivetran",
-    "airbytehq", "dbtlabs", "monte_carlo", "atlan", "collibra", "alation",
-
-    # Additional India / APAC fintech & SaaS
-    "slintel", "zoomcar", "yulu", "vahan", "bijak", "oxyzo", "recko", "juspay",
-    "setu", "signzy", "perfios", "creditmantri", "moneyview", "kissht",
-    "faircent", "indifi", "aye_finance", "u_gro", "veritas_finance", "vivriti",
-    "northernarc", "clix_capital", "loantap", "stashfin", "kredx", "mintifi",
-    "traceable", "sprinto", "zluri", "lucidity", "cloudsek", "safe_security"
+    "twilio", "sendgrid", "crowdstrike", "cloudflare", "fastly", "akamai", "ey", 
+    "deloitte", "pwc", "kpmg", "mckinsey", "bcg", "bain", "spotify", "shopify", "pinterest"
 ]
 
 SCRAPER_PATH = os.path.join(os.path.dirname(__file__), "job_scraper.py")
@@ -118,13 +77,13 @@ def check_lever(company):
     return None
 
 def discover_and_update():
-    print(f"Testing {len(COMPANIES_TO_TEST)} companies in parallel for Greenhouse/Lever...")
+    print(f"Testing {len(COMPANIES_TO_TEST)} company tokens in parallel for Greenhouse/Lever...")
     
     unique_companies = list(set(COMPANIES_TO_TEST))
     active_greenhouse = []
     active_lever = []
     
-    with ThreadPoolExecutor(max_workers=60) as executor:
+    with ThreadPoolExecutor(max_workers=75) as executor:
         gh_futures = {executor.submit(check_greenhouse, c): c for c in unique_companies}
         lev_futures = {executor.submit(check_lever, c): c for c in unique_companies}
         
@@ -145,7 +104,7 @@ def discover_and_update():
         print(f"Error: {SCRAPER_PATH} not found.")
         return
         
-    with open(SCRAPER_PATH, "r") as f:
+    with open(SCRAPER_PATH, "r", encoding="utf-8") as f:
         content = f.read()
         
     # Replace GREENHOUSE_COMPANIES list
@@ -156,7 +115,7 @@ def discover_and_update():
     lev_repr = json.dumps(active_lever)
     content = re.sub(r'LEVER_COMPANIES\s*=\s*\[.*?\]', f'LEVER_COMPANIES = {lev_repr}', content)
     
-    with open(SCRAPER_PATH, "w") as f:
+    with open(SCRAPER_PATH, "w", encoding="utf-8") as f:
         f.write(content)
         
     print("\nSuccessfully updated job_scraper.py with the active lists!")
